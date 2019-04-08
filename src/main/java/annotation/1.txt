@@ -1,0 +1,58 @@
+// 插入数据
+curl -XPUT 'localhost:9200/megacorp/employee/1?pretty' -H 'Content-Type: application/json' -d '
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}'
+
+curl -XPUT 'localhost:9200/megacorp/employee/2?pretty' -H 'Content-Type: application/json' -d '
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}'
+
+// 查询数据
+curl -XGET 'localhost:9200/megacorp/employee/1?pretty'
+
+// 查询全部数据
+curl -XGET 'localhost:9200/megacorp/employee/_search?pretty'
+
+// 查询指定数据
+curl -XGET 'localhost:9200/megacorp/employee/_search?q=first_name:John'
+
+// 使用DSL查询指定数据
+curl -XGET 'localhost:9200/megacorp/employee/_search' -H 'Content-Type: application/json' -d '
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}'
+
+// 使用过滤器
+curl -XGET 'localhost:9200/megacorp/employee/_search' -H 'Content-Type: application/json' -d '{
+    "query" : {
+        "bool": {
+            "must": {
+                "match" : {
+                    "last_name" : "smith"
+                }
+            },
+            "filter": {
+                "range" : {
+                    "age" : { "gt" : 30 }
+                }
+            }
+        }
+    }
+}'
+
+// 查看集群状态
+curl -XGET 'localhost:9200/_cluster/health'

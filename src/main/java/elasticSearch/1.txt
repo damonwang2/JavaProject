@@ -1,0 +1,127 @@
+// 插入数据
+curl -X PUT 'localhost:9200/megacorp/employee/1?pretty' -H 'Content-Type: application/json' -d '
+{
+    "first_name" : "John",
+    "last_name" :  "Smith",
+    "age" :        25,
+    "about" :      "I love to go rock climbing",
+    "interests": [ "sports", "music" ]
+}'
+
+curl -X PUT 'localhost:9200/megacorp/employee/2?pretty' -H 'Content-Type: application/json' -d '
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}'
+
+// 尝试插入，已存在则会失败
+curl -X PUT 'localhost:9200/megacorp/employee/2/_create?pretty' -H 'Content-Type: application/json' -d '
+{
+    "first_name" :  "Jane",
+    "last_name" :   "Smith",
+    "age" :         32,
+    "about" :       "I like to collect rock albums",
+    "interests":  [ "music" ]
+}'
+
+// 查询数据
+curl -X GET 'localhost:9200/megacorp/employee/1?pretty'
+
+// 查询全部数据
+curl -X GET 'localhost:9200/megacorp/employee/_search?pretty'
+
+// 查询指定数据
+curl -X GET 'localhost:9200/megacorp/employee/_search?q=first_name:John'
+
+// 使用DSL查询指定数据
+curl -X GET 'localhost:9200/megacorp/employee/_search' -H 'Content-Type: application/json' -d '
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}'
+
+// 使用过滤器
+curl -X GET 'localhost:9200/megacorp/employee/_search' -H 'Content-Type: application/json' -d '{
+    "query" : {
+        "bool": {
+            "must": {
+                "match" : {
+                    "last_name" : "smith"
+                }
+            },
+            "filter": {
+                "range" : {
+                    "age" : { "gt" : 30 }
+                }
+            }
+        }
+    }
+}'
+
+// 查看集群状态
+curl -X GET 'localhost:9200/_cluster/health'
+
+// 版本控制
+curl -X PUT 'localhost:9200/website/blog/1?version=1&pretty' -H 'Content-Type: application/json' -d '
+{
+    "title": "My first blog entry",
+    "text":  "Starting to get the hang of this..."
+}'
+
+// 更新
+curl -X POST 'localhost:9200/website/blog/1/_update?pretty' -H 'Content-Type: application/json' -d '
+{
+   "doc" : {
+      "tags" : [ "testing" ],
+      "views": 0
+   }
+}'
+
+// 利用脚本更新
+curl -X POST 'localhost:9200/website/blog/1/_update?pretty' -H 'Content-Type: application/json' -d '
+{
+   "script" : "ctx._source.views+=1"
+}'
+
+curl -X POST 'localhost:9200/website/blog/1/_update?pretty' -H 'Content-Type: application/json' -d '
+{
+   "script" : "ctx._source.tags+=new_tag",
+   "params" : {
+      "new_tag" : "search"
+   }
+}'
+
+// 更新，不存在则插入
+
+// 批量获取
+curl -X GET 'localhost:9200/_mget?pretty' -H 'Content-Type: application/json' -d '{
+   "docs" : [
+      {
+         "_index" : "website",
+         "_type" :  "blog",
+         "_id" :    1
+      },
+      {
+         "_index" : "website",
+         "_type" :  "pageviews",
+         "_id" :    1,
+         "_source": "views"
+      }
+   ]
+}'
+
+// 获取所有搜索数据
+curl -X GET 'localhost:9200/_search?pretty'
+
+// 查看映射
+curl -X GET 'localhost:9200/website/_mapping/blog?pretty'
+
+for 行业1 -> 行业n
+    for 年份2013 -> 年份2017
+        求残差向量（不同公司对应一个值）

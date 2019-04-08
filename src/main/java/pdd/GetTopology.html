@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div>
+    <div>
+        <select id = "business"></select>
+        <select id = "topology"></select>
+        <button onclick="{{vm.getTopologies(getSelectedText('business'), getSelectedText('topology'))}}">确认</button>
+    </div>
+
+    <div>
+        <select id = "business2"></select>
+        <select id = "event"></select>
+        <button onclick="{{vm.getEvent(getSelectedText('event'))}}">确认</button>
+    </div>
+</div>
+
+<div id="vm">
+    <div>
+        {{getBusinessAndTopology()}}
+    </div>
+</div>
+
+<!--获取数据-->
+<script type="text/javascript">
+
+    let vm = new Vue({
+        el: '#vm',
+
+        methods: {
+            // 获取business到topology的映射
+            getBusinessAndTopology: function() {
+                console.log("获取business到topology的映射");
+                // 异步调用
+                axios.get("http://localhost:20957/api/v2/getBusinessAndTopology").then(function (res) {
+                    init(res.data, "business", "topology");
+                });
+                axios.get("http://localhost:20957/api/v2/getBusinessAndEvent").then(function (res) {
+                    init(res.data, "business2", "event")
+                })
+            },
+
+            getTopologies: function(business, topology) {
+                console.log("获取拓扑图");
+                //Vue.source插件，目前已经被axios代替
+                axios.get('http://localhost:20957/api/v2/getGraphByBusinessAndTopology?business=' + business + '&topology=' + topology)
+                    .then(function (res) {
+                        // 多张图
+                        let topology2graph = res.data;
+                        for (let topology in topology2graph) {
+                            console.log(topology);
+                            document.writeln("<p>topology名:" + topology + "</p>");
+                            document.writeln(topology2graph[topology]);
+                            document.writeln("<br><br><br><br>");
+                        }
+                    });
+
+            },
+
+            getEvent: function (event) {
+                console.log("获取Event连接图");
+                axios.get("http://localhost:20957/api/v2/getEventGraphByName?name=" + event).then(function (res) {
+                    let graph = res.data;
+                    document.writeln("<p>event name: " + event + "</p>");
+                    document.writeln(graph);
+                })
+            },
+        }
+    });
+
+    let init = function (business2topology, businessSelector, topologySelector) {
+        let business = document.getElementById(businessSelector);
+        let topology = document.getElementById(topologySelector);
+
+        // 为selector添加新的选项
+        function addOption(selector, text) {
+            let option = document.createElement("option");
+            option.innerText = text;
+            selector.options.add(option);
+        }
+
+        function updateTopology() {
+            topology.options.length = 0;
+            if (business.selectedIndex === -1) {
+                return;
+            }
+
+            let selectedIndex = business.selectedIndex;
+            let selectedBusiness = business.options[selectedIndex].text;
+            let topologyList = business2topology[selectedBusiness];
+
+            // 为topology框添加新的选项
+            for(let i = 0; i < topologyList.length; i++) {
+                addOption(topology, topologyList[i]);
+            }
+        }
+
+        for (let businessName in business2topology) {
+            addOption(business, businessName)
+        }
+
+        // 主动触发一次改变,不然从默认第一个,如果继续点第一个,不算改变
+        updateTopology();
+        // 选择(改变)了business,会触发updateTopology,更新topology列表
+        business.onchange = updateTopology;
+    };
+
+    let getSelectedText = function (selectorId) {
+        let selector = document.getElementById(selectorId);
+        let selectedIndex = selector.selectedIndex;
+        return selector.options[selectedIndex].text;
+    }
+
+</script>
+
+</body>
+</html>
