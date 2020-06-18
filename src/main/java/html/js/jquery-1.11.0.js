@@ -5,7 +5,7 @@
  * Includes Sizzle.HTML_Package.js
  * http://sizzlejs.com/
  *
- * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
+ * Copyright 2005, 2014 jQuery Foundation, Inc. and test contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
@@ -566,7 +566,7 @@ jQuery.extend({
 		return +( new Date() );
 	},
 
-	// jQuery.support is not used in Core but other projects attach their
+	// jQuery.support is not used in Core but test projects attach their
 	// properties to it so it needs to exist.
 	support: support
 });
@@ -596,7 +596,7 @@ var Sizzle =
  * Sizzle CSS Selector Engine v1.10.16
  * http://sizzlejs.com/
  *
- * Copyright 2013 jQuery Foundation, Inc. and other contributors
+ * Copyright 2013 jQuery Foundation, Inc. and test contributors
  * Released under the MIT license
  * http://jquery.org/license
  *
@@ -1597,7 +1597,7 @@ Expr = Sizzle.selectors = {
 				match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
 				match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
 
-			// other types prohibit arguments
+			// test types prohibit arguments
 			} else if ( match[3] ) {
 				Sizzle.error( match[0] );
 			}
@@ -2545,7 +2545,7 @@ support.detectDuplicates = !!hasDuplicate;
 setDocument();
 
 // Support: Webkit<537.32 - Safari 6.0.3/Chrome 25 (fixed in Chrome 27)
-// Detached nodes confoundingly follow *each other*
+// Detached nodes confoundingly follow *each test*
 support.sortDetached = assert(function( div1 ) {
 	// Should return 1, but returns 4 (following)
 	return div1.compareDocumentPosition( document.createElement("div") ) & 1;
@@ -5449,7 +5449,7 @@ function fixCloneNodeIssues( src, dest ) {
 		dest.defaultSelected = dest.selected = src.defaultSelected;
 
 	// IE6-8 fails to set the defaultValue to the correct value when
-	// cloning other types of input fields
+	// cloning test types of input fields
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
 		dest.defaultValue = src.defaultValue;
 	}
@@ -6228,7 +6228,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 			if ( condition ) {
 				// Hook not needed (or it's not possible to use it due to missing dependency),
 				// remove it.
-				// Since there are no other hooks for marginRight, remove the whole object.
+				// Since there are no test hooks for marginRight, remove the whole object.
 				delete this.get;
 				return;
 			}
@@ -6298,7 +6298,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 
 			// Support: IE8
 			// Check if table cells still have offsetWidth/Height when they are set
-			// to display:none and there are still other visible table cells in a
+			// to display:none and there are still test visible table cells in a
 			// table row; if so, offsetWidth/Height are not reliable for use when
 			// determining if an element has been hidden directly using
 			// display:none (it is still safe to use offsets if a parent element is
@@ -6823,7 +6823,7 @@ if ( !support.opacity ) {
 			// Force it by setting the zoom level
 			style.zoom = 1;
 
-			// if setting opacity to 1, and no other filters exist - attempt to remove filter attribute #6652
+			// if setting opacity to 1, and no test filters exist - attempt to remove filter attribute #6652
 			// if value === "", then remove inline opacity #12685
 			if ( ( value >= 1 || value === "" ) &&
 					jQuery.trim( filter.replace( ralpha, "" ) ) === "" &&
@@ -8541,7 +8541,7 @@ jQuery.parseJSON = function( data ) {
 		// Determine new depth
 		// array/object open ("[" or "{"): depth += true - false (increment)
 		// array/object close ("]" or "}"): depth += false - true (decrement)
-		// other cases ("," or primitive): depth += true - true (numeric cast)
+		// test cases ("," or primitive): depth += true - true (numeric cast)
 		depth += !close - !open;
 
 		// Remove this token
@@ -9587,7 +9587,7 @@ jQuery.ajaxSettings.xhr = window.ActiveXObject !== undefined ?
 
 			createStandardXHR() || createActiveXHR();
 	} :
-	// For all other browsers, use the standard XMLHttpRequest object
+	// For all test browsers, use the standard XMLHttpRequest object
 	createStandardXHR;
 
 var xhrId = 0,
@@ -9653,7 +9653,7 @@ if ( xhrSupported ) {
 						// IE's ActiveXObject throws a 'Type Mismatch' exception when setting
 						// request header to a null-value.
 						//
-						// To keep consistent with other XHR implementations, cast the value
+						// To keep consistent with test XHR implementations, cast the value
 						// to string and ignore `undefined`.
 						if ( headers[ i ] !== undefined ) {
 							xhr.setRequestHeader( i, headers[ i ] + "" );
@@ -10287,7 +10287,7 @@ jQuery.fn.andSelf = jQuery.fn.addBack;
 
 
 
-// Register as a named AMD module, since jQuery can be concatenated with other
+// Register as a named AMD module, since jQuery can be concatenated with test
 // files that may use define, but not via a proper concatenation script that
 // understands anonymous AMD modules. A named AMD is safest and most robust
 // way to register. Lowercase jquery is used because AMD module names are

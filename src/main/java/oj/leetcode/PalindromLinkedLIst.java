@@ -1,4 +1,4 @@
-package oj.leetcode;import com.sun.xml.internal.messaging.saaj.soap.ver1_2.HeaderElement1_2Impl;
+package oj.leetcode;
 
 class ListNode {
     int val;
