@@ -8,5 +8,6 @@ import java.util.stream.Collectors;
 
 public class Slf4jTest {
     public static void main(String[] args) {
+        System.out.println("test");
     }
 }

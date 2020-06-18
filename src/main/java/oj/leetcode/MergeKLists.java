@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
-import com.google.inject.internal.cglib.core.$ProcessArrayCallback;
 import javafx.util.Pair;
 
 /**

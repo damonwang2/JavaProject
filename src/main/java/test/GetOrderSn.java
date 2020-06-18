@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.mortbay.util.ajax.JSON;
-
 /**
  * TODO
  *
