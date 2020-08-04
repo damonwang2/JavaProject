@@ -28,7 +28,7 @@ public class ProducerConsumerInJava {
  * Thread.
  */
 class Producer extends Thread {
-    private Queue<Integer> queue;
+    private final Queue<Integer> queue;
     private int maxSize;
     public Producer(Queue<Integer> queue, int maxSize, String name){
         super(name); this.queue = queue; this.maxSize = maxSize;
@@ -63,12 +63,10 @@ class Producer extends Thread {
  * from queue.
  */
 class Consumer extends Thread {
-    private Queue<Integer> queue;
-    private int maxSize;
+    private final Queue<Integer> queue;
     public Consumer(Queue<Integer> queue, int maxSize, String name){
         super(name);
         this.queue = queue;
-        this.maxSize = maxSize;
     }
     @Override
     public void run() {

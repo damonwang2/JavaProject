@@ -5,6 +5,9 @@ import java.util.concurrent.*;
 public class ThreadPoolTest2 {
     public static void main(String[] args) {
 
+        Executors.newSingleThreadExecutor();
+        Executors.newCachedThreadPool();
+
         ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
                 10, 10, 10,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<>(10));
@@ -32,6 +35,13 @@ public class ThreadPoolTest2 {
         public MyThread() {
             super();
             super.start();
+        }
+    }
+
+    public static class MyThreadLocal<T> extends ThreadLocal<T> {
+        @Override
+        protected T initialValue() {
+            return null;
         }
     }
 

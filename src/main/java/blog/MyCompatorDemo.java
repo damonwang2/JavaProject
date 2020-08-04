@@ -60,9 +60,7 @@ class MyClass implements Comparable{
     String name = "";
     int id = 0;
 
-    MyClass(){
-
-    }
+    MyClass(){}
     MyClass(String name, int id){
         this.name = name;
         this.id = id;
