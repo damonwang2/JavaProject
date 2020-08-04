@@ -3231,7 +3231,7 @@ var expression = Object.freeze({
       this.run();
     } else {
       // if queued, only overwrite shallow with non-shallow,
-      // but not the other way around.
+      // but not the test way around.
       this.shallow = this.queued ? shallow ? this.shallow : false : !!shallow;
       this.queued = true;
       // record before-push error stack in debug mode
@@ -6893,7 +6893,7 @@ var template = Object.freeze({
     var replacerAttrs = options._replacerAttrs;
     var contextLinkFn, replacerLinkFn;
 
-    // only need to compile other attributes for
+    // only need to compile test attributes for
     // non-fragment instances
     if (el.nodeType !== 11) {
       // for components, container and replacer need to be
@@ -7357,7 +7357,7 @@ var template = Object.freeze({
           if (name === 'class' && Array.prototype.some.call(attrs, function (attr) {
             return attr.name === ':class' || attr.name === 'v-bind:class';
           })) {
-            warn('class="' + rawValue + '": Do not mix mustache interpolation ' + 'and v-bind for "class" on the same element. Use one or the other.', options);
+            warn('class="' + rawValue + '": Do not mix mustache interpolation ' + 'and v-bind for "class" on the same element. Use one or the test.', options);
           }
         }
       } else
@@ -8546,7 +8546,7 @@ var template = Object.freeze({
       var self = this;
       // Cleanup should be called either synchronously or asynchronoysly as
       // callback of this.$remove(), or if remove and deferCleanup are false.
-      // In any case it should be called after all other removing, unbinding and
+      // In any case it should be called after all test removing, unbinding and
       // turning of is done
       var cleanupIfPossible = function cleanupIfPossible() {
         if (destroyReady && !pendingRemoval && !deferCleanup) {
@@ -8622,11 +8622,11 @@ var template = Object.freeze({
       if (this._data.__ob__) {
         this._data.__ob__.removeVm(this);
       }
-      // Clean up references to private properties and other
+      // Clean up references to private properties and test
       // instances. preserve reference to _data so that proxy
       // accessors still work. The only potential side effect
       // here is that mutating the instance after it's destroyed
-      // may affect the state of other components that are still
+      // may affect the state of test components that are still
       // observing the same object, but that seems to be a
       // reasonable responsibility for the user rather than
       // always throwing an error on them.
