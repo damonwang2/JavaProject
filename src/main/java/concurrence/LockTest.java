@@ -5,12 +5,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class LockTest{
     public static void main(String[] args) {
-        SellTicketsRunnable str = new SellTicketsRunnable();
+        SellTicketsRunnable sellTickets = new SellTicketsRunnable();
 
         //三个线程用的同一个对象，即同一个票源
-        Thread tr1 = new Thread(str, "窗口1");
-        Thread tr2 = new Thread(str, "窗口2");
-        Thread tr3 = new Thread(str, "窗口3");
+        Thread tr1 = new Thread(sellTickets, "窗口1");
+        Thread tr2 = new Thread(sellTickets, "窗口2");
+        Thread tr3 = new Thread(sellTickets, "窗口3");
 
         tr1.start();
         tr2.start();
@@ -28,9 +28,9 @@ class SellTicketsRunnable implements Runnable{
     @Override
     public void run() {
         while (true) {
+            // 加锁
+            // lock()方法会对Lock实例对象进行加锁，因此所有对该对象调用lock()方法的线程都会被阻塞，直到该Lock对象的unlock()方法被调用。
             try {
-                // 加锁
-//                lock()方法会对Lock实例对象进行加锁，因此所有对该对象调用lock()方法的线程都会被阻塞，直到该Lock对象的unlock()方法被调用。
                 lock.lock();
                 if (tickets > 0) {
                     try {

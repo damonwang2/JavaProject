@@ -3,16 +3,18 @@ package concurrence;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
 public class FutureTaskTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         //第一种方式：Executor
         ExecutorService executor = Executors.newCachedThreadPool();
         CalculateTask task = new CalculateTask();
         //把task包装到FutureTask中
         FutureTask<Integer> futureTask = new FutureTask<>(task);
-        executor.submit(futureTask);
+        Future<String> result = executor.submit(futureTask, "test");
+        System.out.println(result.get() + "" + System.currentTimeMillis());
         executor.shutdown();
 
         //第二种方式：Thread
@@ -37,6 +39,6 @@ public class FutureTaskTest {
             e.printStackTrace();
         }
 
-        System.out.println("所有任务执行完毕");
+        System.out.println("所有任务执行完毕:" + System.currentTimeMillis());
     }
 }

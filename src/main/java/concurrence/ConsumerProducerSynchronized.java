@@ -22,7 +22,7 @@ public class ConsumerProducerSynchronized {
     }
 }
 
-class Producer1 extends Thread{
+class Producer1 extends Thread {
     private Queue queue;
     private int capacity;
     private int i = 0;
@@ -63,7 +63,7 @@ class Producer1 extends Thread{
 }
 
 class Consumer1 extends Thread{
-    private Queue queue;
+    private final Queue queue;
     public Consumer1(Queue queue){
         this.queue = queue;
     }
@@ -104,5 +104,3 @@ class Consumer1 extends Thread{
         }
     }
 }
-
-

@@ -29,7 +29,7 @@ public class MyCompatorDemo {
 
         //使用自定义排序方式（降序）
         MyComparator c = new MyComparator();
-        Collections.sort(list2, c);
+        list2.sort(c);
         System.out.println(list2);
 
         //匿名内部类的对象
@@ -41,18 +41,15 @@ public class MyCompatorDemo {
         };
 
         //匿名对象
-        Collections.sort(list2, new MyComparator());
+        list2.sort(new MyComparator());
         System.out.println(list2);
 
         //匿名内部类的匿名对象
-        Collections.sort(list2, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer a, Integer b) {
-                return a - b;
-            }
-        });
+        list2.sort(null);
 
         System.out.println(list2);
+
+        System.out.println(null == null);
     }
 }
 
@@ -69,7 +66,7 @@ class MyClass implements Comparable{
     @Override
     public int compareTo(Object o) {
         MyClass myClass = (MyClass) o;
-        return 0 - this.name.compareTo(myClass.name);
+        return -this.name.compareTo(myClass.name);
     }
 }
 

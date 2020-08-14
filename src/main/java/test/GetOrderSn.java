@@ -31,5 +31,12 @@ public class GetOrderSn {
         for (String orderSn : orderSnList) {
             System.out.println(orderSn);
         }
+
+        ArrayList arrayList = new ArrayList();
+
     }
+}
+
+class ArrayList<E> {
+    E[] objects;
 }

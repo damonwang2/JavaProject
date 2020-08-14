@@ -13,6 +13,7 @@ public class ThreadPoolTest {
             MyTask myTask = new MyTask(i);
             System.out.println("加入线程" + i);
             executor.execute(myTask);
+            executor.execute(myTask);
             System.out.println("线程池中线程数目："+executor.getPoolSize());
             System.out.println("队列中等待执行的任务数目："+ executor.getQueue().size());
             System.out.println("已执行完成的任务数目："+executor.getCompletedTaskCount());
