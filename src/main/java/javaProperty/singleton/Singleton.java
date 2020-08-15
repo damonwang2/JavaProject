@@ -4,13 +4,17 @@ package javaProperty.singleton;
 // 为什么叫懒汉，不到getInstance不创建
 public class Singleton {
     //不能加final，因为final必须声明时初始化或者在构造函数中初始化
-    private static Singleton INSTANCE=null;
+    private static Singleton INSTANCE = null;
 
-    private Singleton(){}
+    private Singleton() {
+    }
 
-    public static Singleton getInstance(){
-        if(INSTANCE!=null){
-            INSTANCE = new Singleton();
+    public static Singleton getInstance() {
+        if (INSTANCE == null) {
+            // 这里必须锁类，对象还未初始化
+            synchronized (Singleton.class) {
+                INSTANCE = new Singleton();
+            }
         }
         return INSTANCE;
     }

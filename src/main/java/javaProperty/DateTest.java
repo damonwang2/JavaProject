@@ -1,7 +1,5 @@
 package javaProperty;
 
-import org.apache.commons.net.ntp.TimeStamp;
-
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
