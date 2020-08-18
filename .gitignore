@@ -4,5 +4,7 @@ build/
 logs/
 out/
 gradle*
+gradlew
+gradlew.bat
 generated/
 */.DS_Stare
