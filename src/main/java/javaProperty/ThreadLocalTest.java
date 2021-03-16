@@ -2,19 +2,19 @@ package javaProperty;
 
 public class ThreadLocalTest {
     public static void main (String[] args) {
-        ThreadLocal<String> threadLocalA = new ThreadLocal();
-        ThreadLocal<Integer> threadLocalB = new ThreadLocal();
+        ThreadLocal<String> threadLocalA = new ThreadLocal<>();
+        ThreadLocal<Integer> threadLocalB = new ThreadLocal<>();
 
         Thread thread1 = new Thread(new MyThread1("线程1", threadLocalA, threadLocalB));
 
-        Thread thread2 = new Thread(new MyThread2("线程1", threadLocalA, threadLocalB));
+        Thread thread2 = new Thread(new MyThread2("线程2", threadLocalA, threadLocalB));
 
         thread1.start();
 
 
         try {
             Thread.sleep(1000);
-        }catch (Exception e){
+        } catch (Exception ignored){
 
         }
 
@@ -39,8 +39,8 @@ class MyThread1 extends Thread{
     }
     @Override
     public void run(){
-        threadLocalA.set("1234");
-//        threadLocalB.set(30);
+        threadLocalA.set("ab");
+        threadLocalB.set(30);
         System.out.println("thread1 set threadLocalA " + threadLocalA.get());
     }
 }
@@ -61,8 +61,8 @@ class MyThread2 extends Thread{
     }
     @Override
     public void run(){
+        threadLocalA.set("cd");
+        threadLocalB.set(40);
         System.out.println("thread2 get threadLocalA:" + threadLocalA.get());
-        threadLocalA.set("5678");
-//        threadLocalB.set(40);
     }
 }

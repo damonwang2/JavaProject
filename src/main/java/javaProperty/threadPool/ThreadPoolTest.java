@@ -7,12 +7,11 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolTest {
     public static void main(String[] args) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 10, 200,
-                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(5), new ThreadPoolExecutor.DiscardPolicy() );
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(5), new ThreadPoolExecutor.CallerRunsPolicy() );
 
         for(int i=1;i<=16;i++){
             MyTask myTask = new MyTask(i);
             System.out.println("加入线程" + i);
-            executor.execute(myTask);
             executor.execute(myTask);
             System.out.println("线程池中线程数目："+executor.getPoolSize());
             System.out.println("队列中等待执行的任务数目："+ executor.getQueue().size());
@@ -38,7 +37,7 @@ class MyTask implements Runnable {
         try {
 //            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //            System.out.println(taskNum + "睡眠开始" + df.format(System.currentTimeMillis()));
-            Thread.sleep(4000);
+//            Thread.sleep(4000);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package javaProperty.extendsTest;
 
 public class SuperClass {
-    public static void function(Object object){
-        return;
+    public String name(){
+        return "super class";
     }
 }

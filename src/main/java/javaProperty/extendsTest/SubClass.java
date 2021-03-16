@@ -1,8 +1,8 @@
 package javaProperty.extendsTest;
 
-public class SubClass extends SuperClass{
+public class SubClass extends SuperClass implements SuperInterface {
     public static void main(String[] args) {
-        Integer i = null;
+        System.out.println(new SubClass().name());
     }
 
 }

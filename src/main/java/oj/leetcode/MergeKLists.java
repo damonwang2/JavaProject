@@ -12,21 +12,20 @@ import javafx.util.Pair;
  */
 public class MergeKLists {
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<Pair<Integer, ListNode>> priorityQueue = new PriorityQueue<>(
-            Comparator.comparingInt(Pair::getKey));
+        PriorityQueue<ListNode> priorityQueue = new PriorityQueue<>(
+            Comparator.comparingInt(listNode -> listNode.val));
         for (ListNode listNode : lists) {
-            priorityQueue.add(new Pair<>(listNode.val, listNode));
+            priorityQueue.add(listNode);
         }
         ListNode head = new ListNode(0);
         ListNode result = head;
 
         while (!priorityQueue.isEmpty()) {
-            Pair<Integer, ListNode> pair = priorityQueue.poll();
-            ListNode minNode = pair.getValue();
+            ListNode minNode = priorityQueue.poll();
             head.next = minNode;
-            head.next = head.next.next;
+            head = head.next;
             if (minNode.next != null) {
-                priorityQueue.add(new Pair<>(minNode.next.val, minNode.next));
+                priorityQueue.add(minNode.next);
             }
         }
         return result.next;
