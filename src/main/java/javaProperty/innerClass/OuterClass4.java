@@ -13,7 +13,7 @@ public class OuterClass4 {
         Runnable b = new Runnable() {
             @Override
             public void run() {
-
+                System.out.println(a);
             }
         };
         Thread threadB = new Thread(b);

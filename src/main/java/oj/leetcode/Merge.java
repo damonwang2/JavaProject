@@ -1,6 +1,7 @@
 package oj.leetcode;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Merge {
@@ -9,7 +10,7 @@ public class Merge {
             return intervals;
         }
 
-        intervals.sort((interval1, interval2) -> Integer.compare(interval1.start, interval2.start));
+        intervals.sort(Comparator.comparingInt(interval -> interval.start));
 
         List<Interval> res = new ArrayList<>();
         int start = intervals.get(0).start;

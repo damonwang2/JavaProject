@@ -1,4 +1,4 @@
-package concurrence;
+package concurrence.consumer_producer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 

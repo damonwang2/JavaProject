@@ -8,7 +8,7 @@ public class GetPermutation {
     public String getPermutation(int n, int k) {
         boolean[] used = new boolean[n];
         List<Integer> list = new ArrayList<>(n);
-        backtrack(list, used, new MutableInteger(n));
+        backtrack(list, used, new int[]{n});
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i : list) {
@@ -17,9 +17,9 @@ public class GetPermutation {
         return stringBuilder.toString();
     }
 
-    private void backtrack(List<Integer> tempList, boolean[] used, MutableInteger k) {
+    private void backtrack(List<Integer> tempList, boolean[] used, int[] value) {
         if (tempList.size() == used.length) {
-            k.value--;
+            value[0]--;
             return;
         }
 
@@ -28,22 +28,14 @@ public class GetPermutation {
                 used[i] = true;
                 tempList.add(i);
 
-                backtrack(tempList, used, k);
-                if (k.value == 0) {
+                backtrack(tempList, used, value);
+                if (value[0] == 0) {
                     return;
                 }
 
                 used[i] = false;
                 tempList.remove(tempList.size() - 1);
             }
-        }
-    }
-
-    class MutableInteger {
-        int value;
-
-        public MutableInteger(int value) {
-            this.value = value;
         }
     }
 }

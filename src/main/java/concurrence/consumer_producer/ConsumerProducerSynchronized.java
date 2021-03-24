@@ -1,4 +1,4 @@
-package concurrence;
+package concurrence.consumer_producer;
 
 import java.util.LinkedList;
 import java.util.Queue;
