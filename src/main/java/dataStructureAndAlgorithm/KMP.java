@@ -4,6 +4,7 @@ public class KMP {
     public static void main(String[] args) {
         String pattern = "abcac";
         String source = "ababcabcacbab";
+
         int[] next = getNext(pattern);
 
         for (int i : next){
@@ -11,7 +12,10 @@ public class KMP {
         }
         System.out.println();
 
+        int count = 0;
         for(int i = 0, j = 0; i < source.length() && j < pattern.length(); ){
+            System.out.println("i=" + i +"，j=" + j);
+            count++;
             if(j < 0 || source.charAt(i) == pattern.charAt(j)){
                 i++;
                 j++;
@@ -19,10 +23,13 @@ public class KMP {
                 j = next[j];
             }
             if(j == pattern.length()){
+
+                System.out.println(count);
                 System.out.println("success, the first position in source is " + (i-pattern.length()));
                 return;
             }
         }
+        System.out.println(count);
     }
 
     public static int[] getNext(String pattern){

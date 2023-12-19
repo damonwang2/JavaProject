@@ -29,26 +29,14 @@ public class AnonymousInnerClass{
             e.printStackTrace();
         }
     }
-    public static void test(Bird bird){
-        System.out.println(bird.getName() + bird.fly());
-    }
 }
 
-class Bird {
+abstract class Bird {
     private String name;
 
     public Bird(){
 
     }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int fly(){
-        return 0;
-    };
+    public abstract String getName();
 }
 

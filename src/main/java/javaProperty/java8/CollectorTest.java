@@ -1,13 +1,5 @@
 package javaProperty.java8;
 
-import jdk.nashorn.internal.runtime.options.Option;
-
-import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 /**
  * Created by pojun on 2019/1/7.
  */

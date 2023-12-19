@@ -11,7 +11,7 @@ public class DynamicProxyTest {
         DynamicProxy inter = new DynamicProxy(new Vendor());
         // 加上这句将会产生一个$Proxy0.class文件，这个文件即为动态生成的代理类文件
         // 去掉也可以，why？
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
+//        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
 
         // 获取代理类实例sell
         Sell sell = (Sell)(Proxy.newProxyInstance(Sell.class.getClassLoader(), new Class[] {Sell.class}, inter));
@@ -20,8 +20,8 @@ public class DynamicProxyTest {
 
         // 通过代理类对象调用代理类方法，实际上会转到invoke方法调用
         sell.sell();
-        sell.ad();
 
+        // sell为代理类的实例，实现了Sell接口，调用的也是
         System.out.println("getName:" + sell.getClass().getName());
     }
 }

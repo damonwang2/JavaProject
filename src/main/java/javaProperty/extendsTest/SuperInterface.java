@@ -1,7 +1,8 @@
 package javaProperty.extendsTest;
 
 public interface SuperInterface {
-    default String name(){
-        return "super interface";
+    int a = 1;
+    default String name() {
+        return "super interface:" + a;
     }
 }

@@ -5,11 +5,11 @@ package javaProperty.proxy;
  */
 public class Vendor implements Sell {
     public void sell() {
-        System.out.println("sell method");
+        System.out.println("vendor sell method");
     }
 
     public void ad() {
-        System.out.println("ad method");
+        System.out.println("vendor ad method");
     }
 }
 
